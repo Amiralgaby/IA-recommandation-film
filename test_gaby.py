@@ -10,9 +10,9 @@ def function(file):
 
 def print_iterator(it):
     for x in it:
-        print(x, end='\n')
+        print(x)
 
-f = open('movies.dat', 'r')
+f = open('Data/temp.dat', 'r')
 # là ça fait une liste
 l = [ map(str,line.split('::')) for line in f ]
 
