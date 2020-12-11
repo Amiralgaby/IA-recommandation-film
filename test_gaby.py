@@ -1,4 +1,4 @@
-#python test
+#!/usr/bin/env python
 
 import numpy as np
 import pandas as pd
@@ -15,7 +15,7 @@ try:
 	# Ouverture du fichier
 	f = open(fichierAOuvir, 'r')
 	# là ça fait une liste de liste
-	l = [ list(line.split('::')) for line in f ]
+	l = [ list(line.strip('\n').split('::')) for line in f ]
 except Exception as e:
 	print("le problème vient du fichier : ",fichierAOuvir)
 	raise e
@@ -54,30 +54,64 @@ def liste_TO_dataFrame(liste):
 	return df
 
 
-def liste_TO_dataFrame2(liste,Columms):
-	assert len(Columms) == len(liste[0])
-	colList = [ [] for _ in Columms] # Merci à quelqu'un du serv Nan
+def liste_TO_dataFrame2(liste,columms):
+	assert len(columms) == len(liste[0])
+	colList = [ [] for _ in columms]
 	for i in liste:
-		for j in range(0,len(Columms)):
+		for j in range(0,len(columms)):
 			colList[j].append(i[j])
 	d = {}
 	for i in range(0,len(colList)):
-		d[Columms[i]] = pd.Series(colList[i])
+		d[columms[i]] = pd.Series(colList[i])
 	df = pd.DataFrame(d)
 	return df
 
-col = ['UserID','MovieID','Rating','Timestamp']
-#liste_TO_dataFrame2(l,col)
 
-print('la longueur de la liste est : ',len(l),'\n','-'*8)
-print_list(l)
+######################################
+		###### Pour les ratings (test ) 
+col = ['UserID','MovieID','Rating','Timestamp']
 
 if fichierAOuvir == "Data/test_gaby.dat":
-	df = liste_TO_dataFrame2(l,col)
-	print(df)
+	dfRatingsTest = liste_TO_dataFrame2(l,col)
+	print(dfRatingsTest)
 else:
 	print_list_of_list(l)
 
-#data = ["foo", "foofoo", "foofoofoo"]
-#index = ["1er element", "2eme element", "3eme element"]
-#s = pd.Series(data, index=index)
+
+#######################################
+			#### Pour les movies (test)
+fichierAOuvir = 'Data/temp.dat'
+try:
+	# Ouverture du fichier
+	f = open(fichierAOuvir, 'r')
+	# là ça fait une liste de liste
+	l = [ list(line.strip('\n').split('::')) for line in f ]
+except Exception as e:
+	print("le problème vient du fichier : ",fichierAOuvir)
+	raise e
+
+
+col = ['MovieID','Title','Genres']
+dfMoviesTest = liste_TO_dataFrame2(l,col)
+print(dfMoviesTest)
+
+
+####################################
+			#### Pour les users ####
+fichierAOuvir = 'Data/users.dat'
+try:
+	# Ouverture du fichier
+	f = open(fichierAOuvir, 'r')
+	# là ça fait une liste de liste
+	l = [ list(line.strip('\n').split('::')) for line in f ]
+except Exception as e:
+	print("le problème vient du fichier : ",fichierAOuvir)
+	raise e
+
+
+col = ['UserID','Gender','Age','Occupation','Zip-code']
+dfUser = liste_TO_dataFrame2(l,col)
+print(dfUser)
+
+
+#######################################
