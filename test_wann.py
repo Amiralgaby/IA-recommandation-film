@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 
 #### IMPORT #############
@@ -59,7 +59,7 @@ def obtenirListe(fichierAOuvrir):
         # là ça fait une liste de liste
         l = [ list(line.strip('\n').split('::')) for line in f ]
     except Exception as e:
-        print("le problème vient du fichier : ",file)
+        print("le problème vient du fichier : ",fichierAOuvrir)
         raise e
     else:
         print("[INFO]Réussi",end='\n')
@@ -106,9 +106,9 @@ def recupIndexFilmReco(tabse):
 
 	###### Pour les ratings 
 
-col = ['UserID','MovieID','Rating','Timestamp']
-fichierAOuvir = 'Data/ratings.dat'
 l = obtenirListe('Data/ratings.dat')
+col = ['UserID','MovieID','Rating','Timestamp']
+
 dfRatings = liste_TO_dataFrame2(l,col)
 print(dfRatings)
 
@@ -120,12 +120,11 @@ col = ['MovieID','Title','Genres']
 dfMovies = liste_TO_dataFrame2(l,col)
 print(dfMovies)
 
-
-
 	######## Pour les users
 
 l = obtenirListe('Data/users.dat')
 col = ['UserID','Gender','Age','Occupation','Zip-code']
+
 dfUser = liste_TO_dataFrame2(l,col)
 print(dfUser)
 
@@ -133,7 +132,7 @@ print(dfUser)
 
 user=1
 su=obtenirScoreMoyUser(user)
-print(su)
+print('le score moyen de l\'utilisateur',user,'est',su)
 
 #sul=[]
 #for i in dfRatings.index.values:
