@@ -72,16 +72,13 @@ def mettreAjoutScoreEstime(se,lg,l):
     return se
 
 def scoreAjouterGenre(rat, score):
-    if rat==1:
-        return score-1
-    elif rat==2:
-        return score-0.5
-    elif rat==4:
-        return score+0.5
-    elif rat==5:
-        return score+1
-    else:
-        return score
+    switcher = {
+        1: score-1,
+        2: score-0.5,
+        4: score+0.5,
+        5: score+1
+    }
+    return switcher.get(rat,score)
 
 def recupIndexFilmReco(tabse):
     maxi=0
