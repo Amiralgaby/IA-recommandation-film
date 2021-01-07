@@ -127,7 +127,7 @@ dfRatings = data.dfRatings
 user=int(input("Veuillez donner l'id de l'user (ex : 577) : "))
 
 su=obtenirScoreMoyUser(user) ###Score moyen d'un utilisateur
-print('\nle score moyen de l\'utilisateur',user,'est',su)
+print('\nle score moyen de l\'utilisateur',user,'est',su,'\n')
 
 sug=3.581564453029317 ###Score moyen de tout les utilisateurs
 #sug=obtenirScoreMoyToutUser()
@@ -149,7 +149,7 @@ l=obtenirListeGenreChaqueFilm()
 lg=obtenirListeGenre(l)
 
 lg=mettreAJourScoreGenre(lg,user)
-print(lg)
+mod.print_list_of_list(lg)
 
 se=mod.mettreAjoutScoreEstime(se,lg,l)
 

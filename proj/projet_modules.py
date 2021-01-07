@@ -8,14 +8,10 @@ import sys
 
 ##### DEF DE FONCTIONS #######
 
-def print_list(liste):
-	for i in liste:
-		print(i)
-
-
 def print_list_of_list(liste):
-	for i in liste:
-		print_list(i)
+    colonne = ["Genres","Score"]
+    myList = liste_TO_dataFrame2(liste,colonne)
+    print(myList)
 
 def liste_TO_dataFrame2(liste,columms):
     assert len(columms) == len(liste[0])
