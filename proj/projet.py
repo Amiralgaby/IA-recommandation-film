@@ -32,7 +32,7 @@ def obtenirScoreMoyToutFilm(tab):
 		somme=0
 		nb=0
 		for j in dfRatings.loc[dfRatings['MovieID'] == str(i)].index.values:
-			somme=somme+dfRatings.loc[j,'Rating']
+			somme+=dfRatings.loc[j,'Rating']
 			nb+=1
 		if nb!=0:
 			tab2.append(somme/nb)
@@ -51,8 +51,8 @@ def obtenirScoreMoyToutUser():
 	for i in dfRatings.index.values:
 		sul.append(dfRatings.loc[i,'Rating'])
 	somme=sum((int(i) for i in sul))
-	long=len(sul)
-	return somme/long
+	longueur=len(sul)
+	return somme/longueur
 
 def obtenirIDToutFilm():
 	sfl=[]
@@ -67,7 +67,7 @@ def obtenirScoreMoyToutFilm(tab):
 		somme=0
 		nb=0
 		for j in dfRatings.loc[dfRatings['MovieID'] == str(i)].index.values:
-			somme=somme+dfRatings.loc[j,'Rating']
+			somme+=dfRatings.loc[j,'Rating']
 			nb+=1
 		if nb!=0:
 			tab2.append(somme/nb)
@@ -157,4 +157,8 @@ se=mod.mettreScoreZeroFilmVu(se,tfu,lfi)
 
 idReco=mod.recommanderFilms(se,lfi)
 
-print('\n',idReco)
+listeDeFilm = [dfMovies.loc[i] for i in idReco]
+
+print("\nVoici certain film qui pourrait plaire à l'utilisateur : \n")
+for i in listeDeFilm:
+	print(i[0],' -- ',i[1],' -- ',i[2])
