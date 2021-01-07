@@ -143,7 +143,6 @@ se=mod.mettreScoreZeroFilmVu(se,tfu,lfi)
 
 idReco=mod.recommanderFilms(se,lfi)
 
-print(idReco)
 print("\nVoici certain film qui pourrait plaire à l'utilisateur : \n")
 
 for i in idReco:
