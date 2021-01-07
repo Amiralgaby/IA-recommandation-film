@@ -149,8 +149,10 @@ se=mod.mettreScoreZeroFilmVu(se,tfu,lfi)
 
 idReco=mod.recommanderFilms(se,lfi)
 
-listeDeFilm = [dfMovies.loc[i] for i in idReco]
-
+print(idReco)
 print("\nVoici certain film qui pourrait plaire à l'utilisateur : \n")
-for i in listeDeFilm:
-	print(i[0],' -- ',i[1],' -- ',i[2])
+
+for i in idReco:
+	for j in dfMovies.loc[dfMovies['MovieID'] == str(i)].index.values:
+		thing = dfMovies.iloc[j]
+		print(thing[0],' -- ',thing[1],' -- ',thing[2])
