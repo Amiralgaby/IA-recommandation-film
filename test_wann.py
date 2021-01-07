@@ -19,28 +19,7 @@ def print_list_of_list(liste):
 		print_list(i)
 
 
-def liste_TO_dataFrame(liste):
-	UserID = list()
-	MovieID = list()
-	Rating = list()
-	Timestamp = list()
-	for i in liste:
-		# i est une liste
-		UserID.append(i[0])
-		MovieID.append(i[1])
-		Rating.append(i[2])
-		Timestamp.append(i[3])
-	d = {
-		'UserID': pd.Series(UserID),
-		'MovieID': pd.Series(MovieID),
-		'Rating' : pd.Series(Rating),
-		'Timestamp' : pd.Series(Timestamp)
-		}
-	df = pd.DataFrame(d)
-	return df
-
-
-def liste_TO_dataFrame2(liste,columms):
+def liste_TO_dataFrame(liste,columms):
     assert len(columms) == len(liste[0])
     colList = [ [] for _ in columms]
     for i in liste:
@@ -202,7 +181,7 @@ def recommanderFilms(se,lfi):
 l = obtenirListe('Data/ratings.dat')
 col = ['UserID','MovieID','Rating','Timestamp']
 
-dfRatings = liste_TO_dataFrame2(l,col)
+dfRatings = liste_TO_dataFrame(l,col)
 print(dfRatings)
 
 	####### Pour les movies
@@ -210,16 +189,8 @@ print(dfRatings)
 l = obtenirListe('Data/movies.dat')
 col = ['MovieID','Title','Genres']
 
-dfMovies = liste_TO_dataFrame2(l,col)
+dfMovies = liste_TO_dataFrame(l,col)
 print(dfMovies)
-
-	######## Pour les users
-
-l = obtenirListe('Data/users.dat')
-col = ['UserID','Gender','Age','Occupation','Zip-code']
-
-dfUser = liste_TO_dataFrame2(l,col)
-print(dfUser)
 
 	#Sélection d'un utilisateur et récupération des données:
 
@@ -257,15 +228,3 @@ se=mettreScoreZeroFilmVu(se,tfu,lfi)
 idReco=recommanderFilms(se,lfi)
 
 print(idReco)
-
-#[787, 989, 1830, 3172, 3233, 3280, 3382, 3607, 3656, 3881, 3245, 53, 2503, 2905, 2019, 745, 50, 527, 1148, 439]
-#[787, 989, 1830, 3172, 3233, 3280, 3382, 3607, 3656, 3881, 3245, 53, 2503, 2905, 2019, 318, 858, 745, 50, 527]
-
-#[3307, 1172, 1211, 1244, 1264] User 1
-#[1214, 2617, 2571, 2288, 349] User 21
-#[1264, 266, 912, 123, 293] User 22
-#[1264, 2000, 3266, 2001, 2002] User 23
-#[1264, 3307, 1172, 1211, 1244] User 24
-#[2045, 1196, 3699, 168, 1264] User 400
-#[2000, 3266, 2001, 2002, 1918] User 3337
-#[1264, 168, 2045, 3307, 3257] User 5377
