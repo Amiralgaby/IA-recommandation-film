@@ -20,9 +20,21 @@ import projet_modules as mod
 
 def obtenirScoreMoyUser(user):
 	somme = 0
-	for i in dfRatings.loc[dfRatings['UserID'] == user].index:
+	dfRatingUser = dfRatings.loc[dfRatings['UserID'] == user].index
+	for i in dfRatingUser:
 		somme += dfRatings.loc[i,'Rating']
-	return np.mean(somme)
+	return somme/dfRatingUser.shape[0]
+
+def obtenirScoreMoyToutFilm(tab):
+	tab2=[]
+	for i in tab:
+		somme=0
+		for j in dfRatings.loc[dfRatings['MovieID'] == i].index.values:
+			somme+=dfRatings.loc[j,'Rating']
+		if dfRatings.shape[0] != 0:
+			tab2.append(somme/nb)
+		else:
+			tab2.append(0)
 
 def obtenirListeFilmUser(user):
 	tab=[]
@@ -34,7 +46,8 @@ def obtenirScoreMoyToutUser(): # INUTILISÉE
 	sul=[]
 	for i in dfRatings.index.values:
 		sul.append(dfRatings.loc[i,'Rating'])
-	return np.mean(sul)
+	somme=sum((i for i in sul))
+	return somme/len(sul)
 
 def obtenirIDToutFilm():
 	sfl=[]
