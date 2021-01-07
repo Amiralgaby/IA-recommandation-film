@@ -18,7 +18,7 @@ lRatings = projet_modules.obtenirListe(pathToRoot+'Data/ratings.dat')
 colRatings = ['UserID','MovieID','Rating','Timestamp']
 
 dfRatings = projet_modules.liste_TO_dataFrame2(lRatings,colRatings)
-
+dfRatings['Rating'] = pd.to_numeric(dfRatings['Rating'])
 	####### Pour les movies
 
 lMovies = projet_modules.obtenirListe(pathToRoot+'Data/movies.dat')

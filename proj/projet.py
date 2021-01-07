@@ -20,8 +20,8 @@ import projet_modules as mod
 
 def obtenirScoreMoyUser(user):
     sul=[]
-    for i in data.dfRatings.loc[data.dfRatings['UserID'] == str(user)].index.values:
-        sul.append(data.dfRatings.loc[i,'Rating'])
+    for i in dfRatings.loc[dfRatings['UserID'] == str(user)].index.values:
+        sul.append(dfRatings.loc[i,'Rating'])
     somme=sum((int(i) for i in sul))
     long=len(sul)
     return somme/long
@@ -31,9 +31,9 @@ def obtenirScoreMoyToutFilm(tab):
 	for i in tab:
 		somme=0
 		nb=0
-		for j in data.dfRatings.loc[data.dfRatings['MovieID'] == str(i)].index.values:
-			somme=somme+int(data.dfRatings.loc[j,'Rating'])
-			nb=nb+1
+		for j in dfRatings.loc[dfRatings['MovieID'] == str(i)].index.values:
+			somme=somme+dfRatings.loc[j,'Rating']
+			nb+=1
 		if nb!=0:
 			tab2.append(somme/nb)
 		else:
@@ -42,8 +42,8 @@ def obtenirScoreMoyToutFilm(tab):
 
 def obtenirListeFilmUser(user):
 	tab=[]
-	for i in data.dfRatings.loc[data.dfRatings['UserID'] == str(user)].index.values:
-		tab.append(data.dfRatings.loc[i,'MovieID'])
+	for i in dfRatings.loc[dfRatings['UserID'] == str(user)].index.values:
+		tab.append(dfRatings.loc[i,'MovieID'])
 	return tab
 
 def obtenirScoreMoyToutUser():
@@ -67,8 +67,8 @@ def obtenirScoreMoyToutFilm(tab):
 		somme=0
 		nb=0
 		for j in dfRatings.loc[dfRatings['MovieID'] == str(i)].index.values:
-			somme=somme+int(dfRatings.loc[j,'Rating'])
-			nb=nb+1
+			somme=somme+dfRatings.loc[j,'Rating']
+			nb+=1
 		if nb!=0:
 			tab2.append(somme/nb)
 		else:
