@@ -124,7 +124,7 @@ def obtenirListeGenre(listeG):
 dfMovies = data.dfMovies 
 dfRatings = data.dfRatings
 
-user=int(input("Veuillez donner l'id de l'user (ex : 577) : "))
+user=mod.obtenirUser()
 
 su=obtenirScoreMoyUser(user) ###Score moyen d'un utilisateur
 print('\nle score moyen de l\'utilisateur',user,'est',su,'\n')
@@ -157,4 +157,4 @@ se=mod.mettreScoreZeroFilmVu(se,tfu,lfi)
 
 idReco=mod.recommanderFilms(se,lfi)
 
-print(idReco)
+print('\n',idReco)
