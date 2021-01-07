@@ -17,9 +17,6 @@ def print_list_of_list(liste):
 	for i in liste:
 		print_list(i)
 
-def liste_TO_dataFrame(liste,columms):
-	return liste_TO_dataFrame2(liste,columms)
-
 def liste_TO_dataFrame2(liste,columms):
     assert len(columms) == len(liste[0])
     colList = [ [] for _ in columms]
@@ -53,3 +50,52 @@ def recupIndexFilmReco(tabse):
 			maxi=tabse[i]
 			index=i
 	return index
+
+def obtenirMoyenneToutFilm(smtf):
+    som=0
+    for i in range(0,len(smtf)):
+        som=som+smtf[i]
+    return som/len(smtf)
+
+def mettreScoreZeroFilmVu(se,tfu,lfi):
+    for i in range(0,len(tfu)):
+        for j in range(0,len(lfi)):
+            if tfu[i]==lfi[j]:
+                se[j]=0
+    return se
+
+def mettreAjoutScoreEstime(se,lg,l):
+    for i in range(0,len(l)):
+        for j in lg:
+            if j[0] in l[i]:
+                se[i]=se[i]+j[1]
+    return se
+
+def scoreAjouterGenre(rat, score):
+    if rat==1:
+        return score-1
+    elif rat==2:
+        return score-0.5
+    elif rat==4:
+        return score+0.5
+    elif rat==5:
+        return score+1
+    else:
+        return score
+
+def recupIndexFilmReco(tabse):
+    maxi=0
+    index=0
+    for i in range(0,len(tabse)):
+        if tabse[i]>maxi:
+            maxi=tabse[i]
+            index=i
+    return index
+
+def recommanderFilms(se,lfi):
+    idReco=[]
+    for i in range(0,5):
+        ind=recupIndexFilmReco(se)
+        idReco.append(lfi[ind])
+        se[ind]=0
+    return idReco
