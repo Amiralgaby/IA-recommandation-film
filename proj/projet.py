@@ -19,22 +19,18 @@ import projet_modules as mod
 ###### FUNCTION #########
 
 def obtenirScoreMoyUser(user):
-    sul=[]
-    for i in dfRatings.loc[dfRatings['UserID'] == str(user)].index.values:
-        sul.append(dfRatings.loc[i,'Rating'])
-    somme=sum((int(i) for i in sul))
-    long=len(sul)
-    return somme/long
+    somme = 0
+    for i in dfRatings.loc[dfRatings['UserID'] == user].index.values:
+        somme += dfRatings.loc[i,'Rating']
+    return somme/dfRatings.shape[0]
 
 def obtenirScoreMoyToutFilm(tab):
 	tab2=[]
 	for i in tab:
 		somme=0
-		nb=0
-		for j in dfRatings.loc[dfRatings['MovieID'] == str(i)].index.values:
+		for j in dfRatings.loc[dfRatings['MovieID'] == i].index.values:
 			somme+=dfRatings.loc[j,'Rating']
-			nb+=1
-		if nb!=0:
+		if dfRatings.shape[0] != 0:
 			tab2.append(somme/nb)
 		else:
 			tab2.append(0)
@@ -42,7 +38,7 @@ def obtenirScoreMoyToutFilm(tab):
 
 def obtenirListeFilmUser(user):
 	tab=[]
-	for i in dfRatings.loc[dfRatings['UserID'] == str(user)].index.values:
+	for i in dfRatings.loc[dfRatings['UserID'] == user].index.values:
 		tab.append(dfRatings.loc[i,'MovieID'])
 	return tab
 
@@ -50,7 +46,7 @@ def obtenirScoreMoyToutUser():
 	sul=[]
 	for i in dfRatings.index.values:
 		sul.append(dfRatings.loc[i,'Rating'])
-	somme=sum((int(i) for i in sul))
+	somme=sum((i for i in sul))
 	longueur=len(sul)
 	return somme/longueur
 
@@ -77,17 +73,16 @@ def obtenirScoreMoyToutFilm(tab):
 
 def obtenirListeFilmUser(user):
 	tab=[]
-	for i in dfRatings.loc[dfRatings['UserID'] == str(user)].index.values:
+	for i in dfRatings.loc[dfRatings['UserID'] == user].index.values:
 		tab.append(dfRatings.loc[i,'MovieID'])
-	tab2=[int(i) for i in tab]
 	return tab
 
 def obtenirListeGenreChaqueFilm():
 	return [list(dfMovies.loc[i,'Genres'].strip('\n').split('|')) for i in dfMovies.index.values]
 
 def mettreAJourScoreGenre(lg,user):
-	lus=[int(dfRatings.loc[i,'Rating']) for i in dfRatings.loc[dfRatings['UserID'] == str(user)].index.values]
-	temp=[dfRatings.loc[i,'MovieID'] for i in dfRatings.loc[dfRatings['UserID'] == str(user)].index.values]
+	lus=[dfRatings.loc[i,'Rating'] for i in dfRatings.loc[dfRatings['UserID'] == user].index.values]
+	temp=obtenirListeFilmUser(user)
 	lus2=[]
 	for i in range(0,len(temp)):
 		lus2.append([list(dfMovies.loc[i,'Genres'].strip('\n').split('|')) for j in dfMovies.loc[dfMovies['MovieID'] == temp[i]].index.values])

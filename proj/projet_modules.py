@@ -12,7 +12,7 @@ def obtenirUser():
     if len(sys.argv) < 2:
         print("Vous pouvez aussi passer l'utilisateur en paramètre")
         print(sys.argv[0]," < id utilisateur >\n")
-        user=int(input("Veuillez donner l'id de l'user (ex : 577) : "))
+        user=str(input("Veuillez donner l'id de l'user (ex : 577) : "))
     else:
         user=sys.argv[1]
     return user
