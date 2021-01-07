@@ -68,12 +68,6 @@ def obtenirScoreMoyToutFilm(tab): # INUTILISÉE
 			tab2.append(0)
 	return tab2
 
-def obtenirListeFilmUser(user):
-	tab=[]
-	for i in dfRatings.loc[dfRatings['UserID'] == user].index.values:
-		tab.append(dfRatings.loc[i,'MovieID'])
-	return tab
-
 def obtenirListeGenreChaqueFilm():
 	return [dfMovies.loc[i,'Genres'].strip('\n').split('|') for i in dfMovies.index.values]
 
