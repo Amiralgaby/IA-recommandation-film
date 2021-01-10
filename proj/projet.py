@@ -127,7 +127,6 @@ moym=mod.obtenirMoyenneToutFilm(smtf) ###Score moyen de tout les films
 se=obtenirScoreEstimeUser(su,smtf,sug)
 
 l=obtenirListeGenreChaqueFilm()
-print(l)
 
 lg=obtenirListeGenre(l)
 
